@@ -1,4 +1,4 @@
-# Weather_API_App
+# Weather_APP
 Project for experimentation with OpenWeatherMap API
 
 ## How to Run
