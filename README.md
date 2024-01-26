@@ -1,10 +1,9 @@
 # Weather_API_App
 Project for experimentation with OpenWeatherMap API
 
+## How to Run
 > [!NOTE]
 > If your API call limit for the day has been reached, then the script will return an error
-
-## How to Run
 1. Ensure python is installed
    - Ran with version 3.12.1
 2. Ensure modules/libraries are installed
