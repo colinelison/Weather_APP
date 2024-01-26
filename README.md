@@ -2,9 +2,9 @@
 Project for experimentation with OpenWeatherMap API
 
 ## How to Run
-1. Python is installed
+1. Ensure python is installed
    - Ran with version 3.12.1
-1. Modules/libraries are installed
+1. Ensure modules/libraries are installed
    - `pip install geopy`
    - `pip install requests`
    - `pip install tzdata`
