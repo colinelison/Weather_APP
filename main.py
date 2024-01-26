@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # Make call and get response
     RESPONSE = requests.get(url)
 
-    # Deserialize JSON string into dictionary
+    # Deserialize JSON into dictionary
     WEATHER_DICT = RESPONSE.json()
 
     # Check if there was an error
