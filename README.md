@@ -8,7 +8,7 @@ Project for experimentation with OpenWeatherMap API
    - `pip install tzdata`
 2. Create file "config.py" with contents:
    - `API_KEY="<YOUR_API_KEY_GOES_HERE>"`
-3. python main.py
+3. run `python main.py`
 
 ## Dependencies
 
