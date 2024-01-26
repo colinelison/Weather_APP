@@ -6,7 +6,7 @@ import time
 import requests
 import datetime
 
-# Program to get weather data from a specific location based on latitude and longitude
+# Script to get weather data from a specific location based on latitude and longitude
 if __name__ == '__main__':
 
     # Request coordinates from user
