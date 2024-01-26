@@ -2,13 +2,15 @@
 Project for experimentation with OpenWeatherMap API
 
 ## How to Run
-1. Ensure dependencies are installed
+1. Python is installed
+   - Ran with version 3.12.1
+1. Modules/libraries are installed
    - `pip install geopy`
    - `pip install requests`
    - `pip install tzdata`
 2. Create file "config.py" with contents:
    - `API_KEY="<YOUR_API_KEY_GOES_HERE>"`
-3. run `python main.py`
+3. run `<YOUR_PYTHON_PATH> main.py`
 
 ## Dependencies
 
