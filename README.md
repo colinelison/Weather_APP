@@ -2,18 +2,19 @@
 Project for experimentation with OpenWeatherMap API
 
 > [!NOTE]
-> If the API call limit for the day has been reached (1000) then the script won't work
+> If your API call limit for the day has been reached, then the script will return an error
 
 ## How to Run
 1. Ensure python is installed
    - Ran with version 3.12.1
-1. Ensure modules/libraries are installed
+2. Ensure modules/libraries are installed
    - `pip install geopy`
    - `pip install requests`
    - `pip install tzdata`
-2. Create file "config.py" with contents:
+3. Subscribe to One Call API 3.0 openweathermap and get your API key
+4. Create file "config.py" with contents:
    - `API_KEY="<YOUR_API_KEY_GOES_HERE>"`
-3. run `<YOUR_PYTHON_PATH> main.py`
+5. run `<YOUR_PYTHON_PATH> main.py`
 
 ## Dependencies
 
