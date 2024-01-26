@@ -36,8 +36,8 @@ yarg==0.1.9 <br />
 
 ### `pipreqs .`
 
-geopy==2.4.1
-Requests==2.31.0
+geopy==2.4.1 <br />
+Requests==2.31.0 <br />
 
 ### `python --version`
 Python 3.12.1
