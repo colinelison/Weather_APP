@@ -43,16 +43,30 @@ if __name__ == '__main__':
     # Use the geopy module to convert latitude and longitude into a location
     # A dictionary is returned with location information
     GEOLOCATOR = Nominatim(user_agent="Elison_application")
-    LOCATION = GEOLOCATOR.reverse(LAT+","+LON)
-    GEO_DICT = LOCATION.raw['address']
+    LOCATION = GEOLOCATOR.reverse(LAT+","+LON, language='en')
+
+    displayStr = ""
+
+    try:
+        GEO_DICT = LOCATION.raw['address']
+        displayStr = "The current temperature at {0} Latitude by {1} Longitude ({2} {3} ({4})) is {5} degrees fahrenheit on {6} MDT".format(
+            LAT,
+            LON,
+            (GEO_DICT['city'] if ('city' in GEO_DICT) else ""),
+            (GEO_DICT['state'] if ('state' in GEO_DICT) else ""),
+            GEO_DICT['country'],
+            WEATHER_DICT['current']['temp'],
+            LOCAL_TIME_2
+            )
+    # If address is not at a location (like somewhere in the middle of the ocean)
+    except AttributeError:
+        displayStr = "The current temperature at {0} Latitude by {1} Longitude is {2} degrees fahrenheit on {3} MDT".format(
+            LAT,
+            LON,
+            WEATHER_DICT['current']['temp'],
+            LOCAL_TIME_2
+            )
 
     # Display info
     print("\n")
-    print("The current temperature in {0}, {1} ({2}) is {3} degrees fahrenheit on {4} MDT".format
-        (
-        GEO_DICT['city'],
-        GEO_DICT['state'],
-        GEO_DICT['country'],
-        WEATHER_DICT['current']['temp'],
-        LOCAL_TIME_2
-        ))
+    print(displayStr)
