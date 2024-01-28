@@ -58,7 +58,7 @@ if __name__ == '__main__':
             WEATHER_DICT['current']['temp'],
             LOCAL_TIME_2
             )
-    # If address is not at a location (like somewhere in the middle of the ocean)
+    # If coordinates do not point to an address (like somewhere in the middle of the ocean)
     except AttributeError:
         displayStr = "The current temperature at {0} Latitude by {1} Longitude is {2} degrees fahrenheit on {3} MDT".format(
             LAT,
