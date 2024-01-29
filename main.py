@@ -14,22 +14,24 @@ layout = [
     [
         sg.Text("Please input a Latitude coordinate (decimal degrees [-90,90])"),
         sg.In(size=(10,1),enable_events=True,key='LAT-INPUT-FIELD'),
+    ],
+    [
         sg.Text("Please input a Longitude coordinate (decimal degrees [-180,180])"),
         sg.In(size=(10,1),enable_events=True,key='LON-INPUT-FIELD'),
     ],
     [
-        sg.Submit(key='SUBMIT-BUTTON'),
+        sg.Submit(key='SUBMIT-BUTTON',),
     ],
     [
         sg.Text("Please submit new coordinates", visible=False, key='SAME-COORDINATES-TEXT'),
 
     ],
     [
-        sg.Text(visible=False, key='OUTPUT-TEXT'),
+        sg.Text(visible=False, auto_size_text=True, key='OUTPUT-TEXT',background_color="grey",text_color="white"),
     ]
 ]
 
-window = sg.Window("Weather Application", layout)
+window = sg.Window("Weather Application", layout, size=(1500,200))
 
 recentEntry = ""
 
