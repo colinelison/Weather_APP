@@ -21,6 +21,10 @@ layout = [
         sg.Submit(key='SUBMIT-BUTTON'),
     ],
     [
+        sg.Text("Please submit new coordinates", visible=False, key='SAME-COORDINATES-TEXT'),
+
+    ],
+    [
         sg.Text(visible=False, key='OUTPUT-TEXT'),
     ]
 ]
@@ -29,10 +33,6 @@ window = sg.Window("Weather Application", layout)
 
 recentEntry = ""
 
-# # Request coordinates from user
-# LAT = input("Please input latitude (decimal degrees [-90,90]): ")
-# LON = input("Please input longitude (decimal degrees [-180,180]): ")
-
 while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED:
@@ -40,11 +40,18 @@ while True:
     
     if event == 'SUBMIT-BUTTON':
 
-        # Set unit of measurement to imperial
-        UNITS = "imperial"
 
         LAT = values['LAT-INPUT-FIELD']
         LON = values['LON-INPUT-FIELD']
+
+        if ((LAT+LON) == recentEntry):
+            window['SAME-COORDINATES-TEXT'].update(visible=True)
+            continue
+
+        window['SAME-COORDINATES-TEXT'].update(visible=False)
+        
+        # Set unit of measurement to imperial
+        UNITS = "imperial"
 
         # Build web API call
         url = "https://api.openweathermap.org/data/3.0/onecall?"
@@ -57,6 +64,7 @@ while True:
         WEATHER_DICT = RESPONSE.json()
 
         displayStr = ""
+        
         # Check if there was an error
         if ('cod' in WEATHER_DICT.keys()):
             displayStr = "Error code {0}: {1}".format(WEATHER_DICT['cod'], WEATHER_DICT['message'])
@@ -77,6 +85,7 @@ while True:
 
             localeStr = ""
 
+            # Check that there is an address associated with the coordinates
             if (LOCATION is not None):
                 GEO_DICT = LOCATION.raw['address']
                 localeStr = "({}) ".format(
@@ -94,4 +103,6 @@ while True:
                 )
         
         window['OUTPUT-TEXT'].update(displayStr,visible=True)
+
+        recentEntry = LAT+LON
 
