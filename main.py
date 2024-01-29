@@ -32,7 +32,7 @@ layout = [
 
 window = sg.Window("Weather Application", layout, size=(1500,200))
 
-recentEntry = ""
+previousEntry = ""
 
 while True:
     event, values = window.read()
@@ -44,7 +44,7 @@ while True:
         LAT = values['LAT-INPUT-FIELD']
         LON = values['LON-INPUT-FIELD']
 
-        if ((LAT+LON) == recentEntry):
+        if ((LAT+LON) == previousEntry):
             window['SAME-COORDINATES-TEXT'].update(visible=True)
             continue
 
@@ -101,5 +101,5 @@ while True:
         
         window['OUTPUT-TEXT'].update(displayStr,visible=True)
 
-        recentEntry = LAT+LON
+        previousEntry = LAT+LON
 
