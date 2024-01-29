@@ -10,6 +10,7 @@ Project for experimentation with OpenWeatherMap API
    - `pip install geopy`
    - `pip install requests`
    - `pip install tzdata`
+   - `pip install pysimplegui`
 3. Subscribe to One Call API 3.0 openweathermap and get your API key
 4. Create file "config.py" with contents:
    - `API_KEY="<YOUR_API_KEY_GOES_HERE>"`
