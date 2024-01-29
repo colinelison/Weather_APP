@@ -6,7 +6,57 @@ import time
 import requests
 import datetime
 
-# Script to get weather data from a specific location based on latitude and longitude
+def getInfo(LAT,LON):
+    # Set unit of measurement to imperial
+    UNITS = "imperial"
+
+    # Build web API call
+    url = "https://api.openweathermap.org/data/3.0/onecall?"
+    url = url + "lat=" + LAT + "&lon=" + LON + "&units=" + UNITS + "&appid=" + config.API_KEY
+
+    # Make call and get response
+    RESPONSE = requests.get(url)
+
+    # Deserialize JSON into dictionary
+    WEATHER_DICT = RESPONSE.json()
+
+    displayStr = ""
+    
+    # Check if there was an error
+    if ('cod' in WEATHER_DICT.keys()):
+        displayStr = "Error code {0}: {1}".format(WEATHER_DICT['cod'], WEATHER_DICT['message'])
+    else:                
+        # Get time in epoch seconds by accessing the value of the 'dt' key of the 'current' key of the returned dictionary
+        TIME_UTC_EPOCH_SECONDS = int(WEATHER_DICT['current']['dt'])
+
+        # Another way of getting formatted time using time (seems more flexible)
+        LOCAL_TIME_2 = time.strftime("%A %B %d, %Y @ %I:%M:%S %p %z", time.localtime(TIME_UTC_EPOCH_SECONDS))
+
+        # Use the geopy module to convert latitude and longitude into a location
+        # A dictionary is returned with location information
+        GEOLOCATOR = Nominatim(user_agent="Elison_application")
+        LOCATION = GEOLOCATOR.reverse(LAT+","+LON, language='en')
+
+        localeStr = ""
+
+        # Check that there is an address associated with the coordinates
+        if (LOCATION is not None):
+            GEO_DICT = LOCATION.raw['address']
+            localeStr = "({}) ".format(
+                    ((GEO_DICT['city'] + ", ") if ('city' in GEO_DICT) else "")+
+                    ((GEO_DICT['state'] + " ") if ('state' in GEO_DICT) else "")+
+                    (("in " + GEO_DICT['country']) if ('country' in GEO_DICT) else "")
+                    )
+        
+        displayStr = "The current temperature at {0} Latitude by {1} Longitude {2}is {3} degrees fahrenheit on {4} MDT".format(
+            LAT,
+            LON,
+            localeStr,
+            WEATHER_DICT['current']['temp'],
+            LOCAL_TIME_2
+            )
+    
+    return displayStr
 
 sg.theme('BluePurple')
 
@@ -49,55 +99,8 @@ while True:
             continue
 
         window['SAME-COORDINATES-TEXT'].update(visible=False)
-        
-        # Set unit of measurement to imperial
-        UNITS = "imperial"
 
-        # Build web API call
-        url = "https://api.openweathermap.org/data/3.0/onecall?"
-        url = url + "lat=" + LAT + "&lon=" + LON + "&units=" + UNITS + "&appid=" + config.API_KEY
-
-        # Make call and get response
-        RESPONSE = requests.get(url)
-
-        # Deserialize JSON into dictionary
-        WEATHER_DICT = RESPONSE.json()
-
-        displayStr = ""
-        
-        # Check if there was an error
-        if ('cod' in WEATHER_DICT.keys()):
-            displayStr = "Error code {0}: {1}".format(WEATHER_DICT['cod'], WEATHER_DICT['message'])
-        else:                
-            # Get time in epoch seconds by accessing the value of the 'dt' key of the 'current' key of the returned dictionary
-            TIME_UTC_EPOCH_SECONDS = int(WEATHER_DICT['current']['dt'])
-
-            # Another way of getting formatted time using time (seems more flexible)
-            LOCAL_TIME_2 = time.strftime("%A %B %d, %Y @ %I:%M:%S %p %z", time.localtime(TIME_UTC_EPOCH_SECONDS))
-
-            # Use the geopy module to convert latitude and longitude into a location
-            # A dictionary is returned with location information
-            GEOLOCATOR = Nominatim(user_agent="Elison_application")
-            LOCATION = GEOLOCATOR.reverse(LAT+","+LON, language='en')
-
-            localeStr = ""
-
-            # Check that there is an address associated with the coordinates
-            if (LOCATION is not None):
-                GEO_DICT = LOCATION.raw['address']
-                localeStr = "({}) ".format(
-                        ((GEO_DICT['city'] + ", ") if ('city' in GEO_DICT) else "")+
-                        ((GEO_DICT['state'] + " ") if ('state' in GEO_DICT) else "")+
-                        (("in " + GEO_DICT['country']) if ('country' in GEO_DICT) else "")
-                        )
-            
-            displayStr = "The current temperature at {0} Latitude by {1} Longitude {2}is {3} degrees fahrenheit on {4} MDT".format(
-                LAT,
-                LON,
-                localeStr,
-                WEATHER_DICT['current']['temp'],
-                LOCAL_TIME_2
-                )
+        displayStr = getInfo(LAT,LON)
         
         window['OUTPUT-TEXT'].update(displayStr,visible=True)
 
