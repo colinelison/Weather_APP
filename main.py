@@ -24,7 +24,6 @@ layout = [
     ],
     [
         sg.Text("Please submit new coordinates", visible=False, key='SAME-COORDINATES-TEXT'),
-
     ],
     [
         sg.Text(visible=False, auto_size_text=True, key='OUTPUT-TEXT',background_color="grey",text_color="white"),
