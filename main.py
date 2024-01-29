@@ -58,7 +58,8 @@ def getInfo(LAT,LON):
     
     return displayStr
 
-sg.theme('BluePurple')
+sg.theme('BrownBlue')
+sg.Titlebar("Elison Weather Application")
 
 layout = [
     [
