@@ -28,6 +28,7 @@ geographiclib==2.0 <br />
 geopy==2.4.1 <br />
 idna==3.6 <br />
 pipreqs==0.4.13 <br />
+PySimpleGUI==4.60.5 <br />
 requests==2.31.0 <br />
 tzdata==2023.4 <br />
 urllib3==2.1.0 <br />
