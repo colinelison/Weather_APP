@@ -13,29 +13,10 @@ Project for experimentation with OpenWeatherMap API
    - `API_KEY="<YOUR_API_KEY_GOES_HERE>"`
 5. run `<YOUR_PYTHON_PATH> main.py`
 
-## Dependencies
+## Environment Info
 
 ### `uname -srm`
 MINGW64_NT-10.0-22621 3.3.6-341.x86_64 x86_64
-
-### `pip freeze`
-certifi==2023.11.17 <br />
-charset-normalizer==3.3.2 <br />
-docopt==0.6.2 <br />
-geographiclib==2.0 <br />
-geopy==2.4.1 <br />
-idna==3.6 <br />
-pipreqs==0.4.13 <br />
-PySimpleGUI==4.60.5 <br />
-requests==2.31.0 <br />
-tzdata==2023.4 <br />
-urllib3==2.1.0 <br />
-yarg==0.1.9 <br />
-
-### `pipreqs .`
-
-geopy==2.4.1 <br />
-Requests==2.31.0 <br />
 
 ### `python --version`
 Python 3.12.1
