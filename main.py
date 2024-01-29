@@ -75,25 +75,23 @@ while True:
             GEOLOCATOR = Nominatim(user_agent="Elison_application")
             LOCATION = GEOLOCATOR.reverse(LAT+","+LON, language='en')
 
+            localeStr = ""
 
-            try:
+            if (LOCATION is not None):
                 GEO_DICT = LOCATION.raw['address']
-                displayStr = "The current temperature at {0} Latitude by {1} Longitude ({2} {3} ({4})) is {5} degrees fahrenheit on {6} MDT".format(
-                    LAT,
-                    LON,
-                    (GEO_DICT['city'] if ('city' in GEO_DICT) else ""),
-                    (GEO_DICT['state'] if ('state' in GEO_DICT) else ""),
-                    (GEO_DICT['country'] if ('country' in GEO_DICT) else ""),
-                    WEATHER_DICT['current']['temp'],
-                    LOCAL_TIME_2
-                    )
-            # If coordinates do not point to an address (like somewhere in the middle of the ocean)
-            except AttributeError:
-                displayStr = "The current temperature at {0} Latitude by {1} Longitude is {2} degrees fahrenheit on {3} MDT".format(
-                    LAT,
-                    LON,
-                    WEATHER_DICT['current']['temp'],
-                    LOCAL_TIME_2
-                    )
+                localeStr = "({}) ".format(
+                        ((GEO_DICT['city'] + ", ") if ('city' in GEO_DICT) else "")+
+                        ((GEO_DICT['state'] + " ") if ('state' in GEO_DICT) else "")+
+                        (("in " + GEO_DICT['country']) if ('country' in GEO_DICT) else "")
+                        )
+            
+            displayStr = "The current temperature at {0} Latitude by {1} Longitude {2}is {3} degrees fahrenheit on {4} MDT".format(
+                LAT,
+                LON,
+                localeStr,
+                WEATHER_DICT['current']['temp'],
+                LOCAL_TIME_2
+                )
+        
         window['OUTPUT-TEXT'].update(displayStr,visible=True)
 
