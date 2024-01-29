@@ -41,7 +41,6 @@ while True:
     
     if event == 'SUBMIT-BUTTON':
 
-
         LAT = values['LAT-INPUT-FIELD']
         LON = values['LON-INPUT-FIELD']
 
@@ -72,9 +71,6 @@ while True:
         else:                
             # Get time in epoch seconds by accessing the value of the 'dt' key of the 'current' key of the returned dictionary
             TIME_UTC_EPOCH_SECONDS = int(WEATHER_DICT['current']['dt'])
-
-            # One way of getting formatted time using datetime
-            LOCAL_TIME = datetime.datetime.fromtimestamp(TIME_UTC_EPOCH_SECONDS, ZoneInfo("America/Denver"))
 
             # Another way of getting formatted time using time (seems more flexible)
             LOCAL_TIME_2 = time.strftime("%A %B %d, %Y @ %I:%M:%S %p %z", time.localtime(TIME_UTC_EPOCH_SECONDS))
